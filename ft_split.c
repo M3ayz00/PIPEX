@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:27:30 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/08 02:02:36 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:02:04 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ static char	*ft_wordcpy(char const *src, int n)
 {
 	char	*dest;
 
-	dest = malloc((n + 2) * sizeof(char));
+	dest = malloc((n + 1) * sizeof(char));
 	if (!dest)
 		return (0);
 	dest[n] = '\0';
-	dest[n - 1] = '/';
 	while (n--)
 		dest[n] = src[n];
 	return (dest);
