@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+         #
+#    By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 18:34:38 by msaadidi          #+#    #+#              #
-#    Updated: 2024/02/09 00:03:25 by m3ayz00          ###   ########.fr        #
+#    Updated: 2024/02/09 16:59:03 by msaadidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 CC = cc -Wall -Wextra -Werror 
-SRCS = pipex.c check_parse.c ft_split.c
+SRCS = pipex.c check_parse.c ft_split.c ft_strtrim.c mem_management.c
 
 OBJS = $(SRCS:.c=.o)
 
