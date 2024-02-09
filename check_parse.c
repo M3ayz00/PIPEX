@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:37:21 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/08 17:31:50 by msaadidi         ###   ########.fr       */
+/*   Updated: 2024/02/08 21:32:42 by m3ayz00          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void is_cmd_valid(char *cmd, char **env) {
     if (env[i] && ft_memcmp(env[i], "PATH=", 5) == 0) 
     {
         path_env = env[i] + 5; // Skip "PATH="
-        char **path_list = ft_split(path_env, ':');
+        char **path_list = ft_split(path_env, ':'); 
         if (!path_list)
             ft_perror("Error: Failed split.\n");
         int j = 0;
