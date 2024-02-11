@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:17 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/09 16:56:00 by msaadidi         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:26:53 by m3ayz00          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
+# include <sys/wait.h>
+# include <stdint.h>
 
-void    check_args(int ac, char **av);
 char	**ft_split(char const *s, char c);
-char    *is_cmd_valid(char *cmd, char **env);
 char	**ft_free(char **str, size_t n);
 char    *first_word(char *str);
 char	*ft_strtrim(char *s, char *set);
@@ -31,5 +31,14 @@ void	*ft_calloc(size_t num_elements, size_t element_size);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 int     ft_strlen(char *str);
 int	    ft_memcmp(const void *str1, const void *str2, size_t n);
+
+void    ft_perror(char *err);
+void    check_files(int ac, char **av);
+void    check_cmds(char *cmd1, char *cmd2, char **envp);
+char    **get_full_path(char *cmd1, char *cmd2, char **env);
+char    *get_cmd_path(char  **av, char **envp, int i);
+void    child_process(char **av, char **env, int p[]);
+void    parent_process(char **av, char **env, int p[]);
+
 
 #endif

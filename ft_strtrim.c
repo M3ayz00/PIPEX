@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:38:49 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/09 16:58:48 by msaadidi         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:51:54 by m3ayz00          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ char	*ft_strtrim(char *s, char *set)
 		if (!tmp)
 			return (NULL);
 	}
-	printf("-->%s\n", tmp);
 	return (tmp);
 }

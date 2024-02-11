@@ -6,7 +6,7 @@
 /*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:27:30 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/09 01:14:50 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/10 21:51:37 by m3ayz00          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	**ft_free(char **str, size_t n)
 	}
 	free(str);
 	str = NULL;
-	return (0);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 		return (0);
 	size = ft_wordcount(s, c);
 	t = malloc((size + 1) * sizeof(char *));
-	if (!t)
+	if (!t || size == 0)
 		return (0);
 	i = -1;
 	while (++i < size)
