@@ -6,7 +6,7 @@
 /*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:14 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/10 22:26:22 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/12 02:37:06 by m3ayz00          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main(int ac, char **av, char **envp)
 {
     int p1[2];
-    check_files(ac, av);
+    check_args(ac, av);
     // check_cmds(av[2], av[3], envp);
     if (pipe(p1)== -1)
     {
@@ -29,7 +29,10 @@ int main(int ac, char **av, char **envp)
         exit(1);
     }
     else if (pid == 0)
+    {
         child_process(av, envp, p1);
+        printf("HERE ?\n");
+    }
     else
     {
         int wstatus;

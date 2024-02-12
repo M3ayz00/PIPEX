@@ -6,7 +6,7 @@
 /*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:27:30 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/10 21:51:37 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/11 22:08:45 by m3ayz00          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_wordlen(char const *s, char c)
 	return (i);
 }
 
-static int	ft_wordcount(char const *s, char c)
+int	ft_wordcount(char const *s, char c)
 {
 	int	i;
 	int	w;
@@ -53,7 +53,7 @@ static char	*ft_wordcpy(char const *src, int n)
 	return (dest);
 }
 
-char	**ft_free(char **str, size_t n)
+static char	**ft_free(char **str, size_t n)
 {
 	size_t	i;
 
