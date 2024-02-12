@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:37:21 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/12 02:49:53 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:25:36 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,6 @@ char    *first_word(char *str)
     return (first_word);
 }
 
-// void    check_cmds(char *c1, char *c2, char **envp)
-// {
-//     char    **cmd_path;
-//     char    *cmd1;
-//     char    *cmd2;
-
-//     cmd1 = first_word(c1);
-//     cmd2 = first_word(c2);
-//     cmd_path = get_full_path(cmd1, cmd2, envp);
-//     free(cmd1);
-//     free(cmd2);
-//     if (!cmd_path)
-//         ft_perror("Invalid Command\n");
-//     ft_free(cmd_path, 2);
-// }
-
 void    perror_strs(char *infile, char *outfile, char *str)
 {
     perror(str);
@@ -91,11 +75,11 @@ void    check_commands(int ac, char **av)
     char    *cmd2;
     
     if (ac != 5 || !av[2][0] || !av[3][0])
-        ft_perror("Error\n");
+        ft_perror("Error");
     cmd1 = ft_strtrim(av[2], " ");
     cmd2 = ft_strtrim(av[3], " ");
     if (!cmd1[0] || !cmd2[0])
-        perror_strs(cmd1, cmd2, "Error");
+        perror_strs(cmd1, cmd2, "command not found");
     free(cmd1);
     free(cmd2);
 }
@@ -168,7 +152,7 @@ char    **find_executable_path(char **path_list, char *cmd1, char *cmd2)
         if(!found1)
         {
             full_path[0] = join_path(path_list[i], cmd1);
-            if (!full_path)
+            if (!full_path[0])
                 return (NULL);
             // printf("==>%s\n", full_path[0]);
             if (access(full_path[0], X_OK) == 0)// Check if the full path is executable   
@@ -179,7 +163,7 @@ char    **find_executable_path(char **path_list, char *cmd1, char *cmd2)
         if(!found2)
         {
             full_path[1] = join_path(path_list[i], cmd2);
-            if (!full_path)
+            if (!full_path[1])
                 return (NULL);
             // printf("==>%s\n", full_path[1]);
             if (access(full_path[1], X_OK) == 0)// Check if the full path is executable   

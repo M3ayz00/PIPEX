@@ -2,19 +2,7 @@
 #include <unistd.h>
 #include "pipex.h"
 
-char    *ft_strjoin(char *str1, char *str2)
-{
-    if (!str1)
-        return (str2);
-    if (!str2)
-        return (str1);
-    int full_len = strlen(str1) + strlen(str2);
-    char *joined = malloc(full_len + 1);
-    strcpy(joined, str1);
-    strcpy(joined + strlen(str1), str2);
-    joined[full_len] = '\0';
-    return joined;
-}
+
 
 int main(int ac, char **av, char **env)
 {
@@ -36,14 +24,20 @@ int main(int ac, char **av, char **env)
     }
     else
     {
-        wait(NULL); // wait for child process to die
-        close(p1[1]); // close write-end 
-        dup2(fd2, 1); // redirect output to outfile a.k.a outfile = stdout
-        dup2(p1[0], 0); // redirect input to read-end a.k.a read-end = stdin
-        char **cmd_args = ft_split(av[3], ' '); // split command and options
-        if(execve("/usr/bin/wc", cmd_args, env) == -1) // execute cmd with options
-            perror("Error2");
-        close(p1[0]); // close read-end
-        return 0;
+        int pid2 = fork();
+        if (pid2 == 0)
+        {
+            close(p1[1]); // close write-end 
+            dup2(fd2, 1); // redirect output to outfile a.k.a outfile = stdout
+            dup2(p1[0], 0); // redirect input to read-end a.k.a read-end = stdin
+            char **cmd_args = ft_split(av[3], ' '); // split command and options
+            if(execve("/usr/bin/wc", cmd_args, env) == -1) // execute cmd with options
+                perror("Error2");
+            close(p1[0]); // close read-end
+        }
+        else
+        {
+            wait(NULL); // wait for child process to die
+        }
     }
 }

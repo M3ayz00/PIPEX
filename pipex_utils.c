@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 01:20:40 by m3ayz00           #+#    #+#             */
-/*   Updated: 2024/02/12 02:53:40 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/12 19:22:15 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ char    **check_cmd_path(char **av, char **env, int end[], int fd)
         close(fd);
         close(end[0]);
         close(end[1]);
-        perror("Error");
+        perror("Error2");
         exit(1);
     }
     return (cmd_path);
 }
 
-void    setup_parent_redirection(int fd, int end[])
+void    setup_child2_redirection(int fd, int end[])
 {
     close(end[1]); // close write-end
     dup2(fd, STDOUT_FILENO); // redirect output to outfile a.k.a outfile = stdout
@@ -89,7 +89,7 @@ void    setup_parent_redirection(int fd, int end[])
     close(end[0]); // close read-end
 }
 
-void    setup_child_redirection(int fd, int end[])
+void    setup_child1_redirection(int fd, int end[])
 {
     close(end[0]);  // close read-end
     dup2(fd, STDIN_FILENO);// redirect input to infile a.k.a infile = stdin
@@ -107,15 +107,14 @@ char    **get_cmd_args(char *command)
     if (!cmd[0])
     {
         free(cmd);
-        perror(command);
-        exit(1);   
+        ft_perror(command);  
     }
     cmd_args = ft_split(cmd, ' '); 
     free(cmd);
     return (cmd_args);
 }
 
-void    child_process(char **av, char **env, int end[])
+void    child1_process(char **av, char **env, int end[])
 {
     int fd;
     char **cmd_path;
@@ -125,7 +124,7 @@ void    child_process(char **av, char **env, int end[])
     fd = open_infile(av[1], end);
     cmd_path = check_cmd_path(av, env, end, fd);
     // write(2, "child_process function is called\n", 33);
-    setup_child_redirection(fd, end);
+    setup_child1_redirection(fd, end);
     cmd_args = get_cmd_args(av[2]);
     if(execve(cmd_path[0], cmd_args, env) == -1)
     {
@@ -135,7 +134,7 @@ void    child_process(char **av, char **env, int end[])
     }
 }
 
-void    parent_process(char **av, char **env, int end[])
+void    child2_process(char **av, char **env, int end[])
 {
     int fd;
     char **cmd_path;
@@ -143,7 +142,7 @@ void    parent_process(char **av, char **env, int end[])
 
     fd = open_outfile(av[4], end);
     cmd_path = check_cmd_path(av, env, end, fd);
-    setup_parent_redirection(fd, end);
+    setup_child2_redirection(fd, end);
     cmd_args = get_cmd_args(av[3]);
     if(execve(cmd_path[1], cmd_args, env) == -1)
     {

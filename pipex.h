@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:30:17 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/12 02:37:28 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/12 14:22:51 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void    ft_perror(char *err);
 void    check_args(int ac, char **av);
 char    **get_full_path(char *cmd1, char *cmd2, char **env);
 char    **get_cmd_path(char  **av, char **envp);
-void    child_process(char **av, char **env, int p[]);
-void    parent_process(char **av, char **env, int p[]);
+void    child1_process(char **av, char **env, int p[]);
+void    child2_process(char **av, char **env, int p[]);
 void    ft_free2(char **path_list);
 
 #endif
