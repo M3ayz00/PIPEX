@@ -6,7 +6,7 @@
 /*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:37:21 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/12 16:25:36 by msaadidi         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:23:38 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int ft_strlen(char *str)
     return (i);
 }
 
+//custom error msg
+void    ft_cerror(char *err)
+{
+    write(2, err, ft_strlen(err));
+    exit(1);
+}
+
+//error msg
 void    ft_perror(char *err)
 {
     perror(err);
@@ -110,74 +118,6 @@ void    check_args(int ac, char **av)
     check_commands(ac, av);
 }
 
-char    *join_path(char *path, char *cmd)
-{
-    int     path_len;
-    int     full_len;
-    char    *full_path;
-    
-    if (!path)
-        return (NULL);
-    path_len = ft_strlen(path);
-    full_len = path_len + ft_strlen(cmd) + 2; // 2 for '/' and '\0'
-    full_path = (char *)malloc(full_len);
-    if (!full_path)
-        return (NULL);
-    ft_memcpy(full_path, path, path_len);// Construct the full path
-    full_path[path_len] = '/';
-    ft_memcpy(full_path + path_len + 1, cmd, ft_strlen(cmd));
-    full_path[full_len - 1] = '\0';
-    return (full_path);
-}
-
-char    **find_executable_path(char **path_list, char *cmd1, char *cmd2)
-{
-    char    **full_path;
-    int found1;
-    int found2;
-    int     i;
-
-    i = 0;
-    found1 = 0;
-    found2 = 0;
-    full_path = ft_calloc(2, sizeof(char *));
-    if (!full_path)
-    {
-        ft_free2(path_list);
-        return (NULL);
-    }
-    while (path_list[i] && !(found1 && found2))// Iterate through each path in PATH
-    {
-        // printf("%s\n", path_list[i]);
-        if(!found1)
-        {
-            full_path[0] = join_path(path_list[i], cmd1);
-            if (!full_path[0])
-                return (NULL);
-            // printf("==>%s\n", full_path[0]);
-            if (access(full_path[0], X_OK) == 0)// Check if the full path is executable   
-                found1 = 1;
-            else
-                free(full_path[0]);
-        }
-        if(!found2)
-        {
-            full_path[1] = join_path(path_list[i], cmd2);
-            if (!full_path[1])
-                return (NULL);
-            // printf("==>%s\n", full_path[1]);
-            if (access(full_path[1], X_OK) == 0)// Check if the full path is executable   
-                found2 = 1;
-            else
-                free(full_path[1]);
-        }
-        i++;
-    }
-    if (found1 && found2)
-        return (full_path);
-    free(full_path);
-    return (NULL);
-}
 
 char    **get_path_list(char **env)
 {
@@ -199,26 +139,5 @@ char    **get_path_list(char **env)
 
 
 
-char    **get_full_path(char *cmd1, char *cmd2, char **env) 
-{
-    char **path_list;
-    char **full_path;
 
-    if(!cmd1 || !cmd2 || !env)
-        return (NULL);
-    path_list = get_path_list(env);
-    if (!path_list)
-        return (NULL);
-    full_path = ft_calloc(2, sizeof(char *));
-    if (!full_path)
-    {
-        ft_free2(path_list);
-        return (NULL);
-    }
-    full_path = find_executable_path(path_list, cmd1, cmd2);
-    ft_free2(path_list);
-    if (full_path == NULL)
-        return (NULL);
-    return (full_path);
-}
 

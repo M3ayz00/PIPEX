@@ -6,7 +6,7 @@
 /*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:52:46 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/09 16:53:48 by msaadidi         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:23:01 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,28 @@ void	*ft_calloc(size_t num_elements, size_t element_size)
 	return (a);
 }
 
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*j_str;
+	size_t	i;
+	size_t	j;
+
+	j_str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!j_str)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		j_str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != '\0')
+	{
+		j_str[i] = s2[j];
+		i++;
+		j++;
+	}
+	j_str[i] = '\0';
+	return (j_str);
+}
