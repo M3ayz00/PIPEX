@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m3ayz00 <m3ayz00@student.42.fr>            +#+  +:+       +#+        */
+/*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:27:30 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/11 22:08:45 by m3ayz00          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:16:49 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 static int	ft_wordlen(char const *s, char c)
 {
@@ -22,7 +22,7 @@ static int	ft_wordlen(char const *s, char c)
 	return (i);
 }
 
-int	ft_wordcount(char const *s, char c)
+static	int	ft_wordcount(char const *s, char c)
 {
 	int	i;
 	int	w;
