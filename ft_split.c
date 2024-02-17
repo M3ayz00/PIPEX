@@ -6,23 +6,23 @@
 /*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 15:27:30 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/14 12:16:49 by msaadidi         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:47:21 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "pipex.h"
 
-static int	ft_wordlen(char const *s, char c)
+static int	ft_wordlen(char const *s, char *set)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] && s[i] != c)
+	while (s[i] && !is_c_in_set(s[i], set))
 		i++;
 	return (i);
 }
 
-static	int	ft_wordcount(char const *s, char c)
+int	ft_wordcount(char const *s, char *set)
 {
 	int	i;
 	int	w;
@@ -30,9 +30,9 @@ static	int	ft_wordcount(char const *s, char c)
 	w = 0;
 	while (*s)
 	{
-		while (*s && *s == c)
+		while (*s && is_c_in_set(*s, set))
 			s++;
-		i = ft_wordlen(s, c);
+		i = ft_wordlen(s, set);
 		s += i;
 		if (i)
 			w++;
@@ -69,7 +69,7 @@ static char	**ft_free(char **str, size_t n)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *set)
 {
 	char	**t;
 	int		size;
@@ -78,16 +78,16 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	size = ft_wordcount(s, c);
+	size = ft_wordcount(s, set);
 	t = malloc((size + 1) * sizeof(char *));
-	if (!t || size == 0)
-		return (0);
+	if (!t)
+		return (NULL);
 	i = -1;
 	while (++i < size)
 	{
-		while (*s && *s == c)
+		while (*s && is_c_in_set(*s, set))
 			s++;
-		n = ft_wordlen(s, c);
+		n = ft_wordlen(s, set);
 		if (*s)
 			t[i] = ft_wordcpy(s, n);
 		if (!t[i])

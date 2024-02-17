@@ -6,11 +6,11 @@
 /*   By: msaadidi <msaadidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:52:46 by msaadidi          #+#    #+#             */
-/*   Updated: 2024/02/14 12:15:27 by msaadidi         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:49:08 by msaadidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "pipex.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
@@ -75,8 +75,12 @@ void	*ft_calloc(size_t num_elements, size_t element_size)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*j_str;
+	int		s1_len;
+	int		s2_len;
 
-	j_str = (char *)ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	j_str = (char *)ft_calloc((s1_len + s2_len + 1), sizeof(char));
 	if (!j_str)
 		return (NULL);
 	ft_memcpy(j_str, s1, ft_strlen(s1));
